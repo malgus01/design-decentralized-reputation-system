@@ -95,7 +95,7 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
 
     // Counters
     uint256 private _ratingIdCounter;
-    
+
     constructor(address _reputationRegistry, address _owner) Ownable(_owner) {
         reputationRegistry = IReputationRegistry(_reputationRegistry);
 
@@ -107,4 +107,15 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
             requireMinReputation: true
         });
     }
+
+        // Events
+    event RatingSubmitted(
+        uint256 indexed ratingId,
+        address indexed rater,
+        address indexed ratee,
+        uint256 score,
+        RatingCategory category,
+        RatingContext context,
+        string comment
+    );
 }

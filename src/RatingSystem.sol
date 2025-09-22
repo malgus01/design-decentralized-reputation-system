@@ -125,4 +125,10 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
         uint256 newScore,
         string newComment
     );
+
+    event RatingDeactivated(
+        uint256 indexed ratingId,
+        address indexed deactivatedBy,
+        string reason
+    );
 }

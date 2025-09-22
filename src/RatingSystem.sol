@@ -93,6 +93,30 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
     // Configuration
     RatingLimits public ratingLimits;
 
+    // Counters
+    uint256 private _ratingIdCounter;
+
+    // Events
+    event RatingSubmitted(
+        uint256 indexed ratingId,
+        address indexed rater,
+        address indexed ratee,
+        uint256 score,
+        RatingCategory category,
+        RatingContext context,
+        string comment
+    );
+
+    event RatingUpdated(uint256 indexed ratingId, uint256 oldScore, uint256 newScore, string newComment);
+
+    event RatingDeactivated(uint256 indexed ratingId, address indexed deactivatedBy, string reason);
+
+    event RatingLimitsUpdated(
+        uint256 cooldownPeriod, uint256 maxRatingsPerDay, uint256 minReputationToRate, bool requireMinReputation
+    );
+
+    event BulkRatingSubmitted(address indexed rater, address[] ratees, uint256[] scores, uint256 totalRatings);
+
     constructor(address _reputationRegistry, address _owner) Ownable(_owner) {
         reputationRegistry = IReputationRegistry(_reputationRegistry);
 

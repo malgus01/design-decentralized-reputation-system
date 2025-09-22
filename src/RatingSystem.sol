@@ -93,6 +93,9 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
     // Configuration
     RatingLimits public ratingLimits;
 
+    // Counters
+    uint256 private _ratingIdCounter;
+    
     constructor(address _reputationRegistry, address _owner) Ownable(_owner) {
         reputationRegistry = IReputationRegistry(_reputationRegistry);
 

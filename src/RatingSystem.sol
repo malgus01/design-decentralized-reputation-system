@@ -138,4 +138,11 @@ contract RatingSystem is Ownable, ReentrancyGuard, Pausable {
         uint256 minReputationToRate,
         bool requireMinReputation
     );
+
+    event BulkRatingSubmitted(
+        address indexed rater,
+        address[] ratees,
+        uint256[] scores,
+        uint256 totalRatings
+    );
 }
